@@ -9,8 +9,8 @@ import numpy as np
 from lib.resnet50 import ResNet50
 from lib.imagenet_utils import preprocess_input
 from keras.models import Model
-from src import layer_extraction
-from src import preprocessing
+from src.layer_extraction import layer_feature_extraction
+from src.preprocessing import br_grabcut
 
 
 os.getcwd()
