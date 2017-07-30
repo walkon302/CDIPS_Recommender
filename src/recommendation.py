@@ -83,7 +83,11 @@ def recommendation_score(user_id,candidate_spu,user_profile,spu_fea,method='Aver
         average_features = get_user_average_features(user_id,user_profile,spu_fea)
 
         # load nn features for candidate item
-        features_other = spu_fea.loc[spu_fea.spu_id==candidate_spu,'features'].as_matrix()[0] # return a 1-D np array
+        try:
+            features_other = spu_fea.loc[spu_fea.spu_id==candidate_spu,'features'].as_matrix()[0] # return a 1-D np array
+        except:
+            features_other = np.ones(len(average_features))
+            print('missing a candidates features ui:'+str(user_id)+' spu:'+str(candidate_spu))
 
         return(similarity(average_features,features_other))
 
@@ -101,8 +105,11 @@ def recommendation_score(user_id,candidate_spu,user_profile,spu_fea,method='Aver
         features_lastitem = spu_fea.loc[spu_fea.spu_id==lastitem_spu,'features'].as_matrix()[0] # return a 1-D np array
 
         # get candidate item features
-        features_candidate = spu_fea.loc[spu_fea.spu_id==candidate_spu,'features'].as_matrix()[0] # return a 1-D np array
-
+        try:
+            features_candidate = spu_fea.loc[spu_fea.spu_id==candidate_spu,'features'].as_matrix()[0] # return a 1-D np array
+        except:
+            features_candidate = np.ones(len(features_lastitem))
+            print('missing a candidates features ui:'+str(user_id)+' spu:'+str(candidate_spu))
         # return similarity
         return(similarity(features_lastitem,features_candidate))
 
