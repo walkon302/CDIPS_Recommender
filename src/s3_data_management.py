@@ -22,3 +22,5 @@ def push_results_to_s3(fname,fpath):
     key.set_contents_from_filename(fpath,
         cb=percent_cb, num_cb=10)
     s3_connection.close()
+    print('')
+    print('https://s3-us-west-2.amazonaws.com/bishopbucket/proj_cdips/Results/'+fname)
