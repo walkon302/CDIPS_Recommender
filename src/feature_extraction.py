@@ -1,5 +1,5 @@
 from keras.preprocessing import image
-import cv2
+#import cv2
 import glob
 import sys
 import os
